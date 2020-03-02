@@ -66,11 +66,12 @@ int p2() {
 	fclose(file);
 
 	printf("%d", sum);
+	return 0;
 }
 
 int main() {
 	// play with problem 2 
-	if (1)
+	if (0)
 	{
 		p2();
 		return 1;
