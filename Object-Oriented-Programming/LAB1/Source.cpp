@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 int myAtoi(char* s) {
 	int res = 0; 
@@ -12,60 +11,86 @@ int myAtoi(char* s) {
 	// return result. 
 	return res;
 }
+// Function to Sort the array of string 
+// according to lengths. This function  
+// implements Insertion Sort.  
+void sort(std::string s[], int n)
+{
+	for (int i = 1; i < n; i++)
+	{
+		std::string temp = s[i];
+
+		// Insert s[j] at its correct position 
+		int j = i - 1;
+		while (j >= 0 && temp.length() < s[j].length())
+		{
+			s[j + 1] = s[j];
+			j--;
+		}
+		s[j + 1] = temp;
+	}
+}
 
 int p2() {
 	FILE* file;
+	std::string arr[10];
 	char chars[100];
-	char m[10][20];
-	int sum = 0;
 	int wcount = 0;
-	int word[10];
-	int order[10];
-	for (int i = 0; i < 10; i++) {
-		word[i] = 0;
-		order[i] = 0;
-	}
 
 	file = fopen("p2.in", "r");
 	if (!file) {
 		return 0;
 	}
+	fclose(file);
 	if (fgets(chars, 100, file) != NULL) {
+		arr[wcount] = "";
 		for (int i = 0; chars[i] != '\0'; ++i) {
 			if (chars[i] != ' ') {
-				word[wcount]++;
-				m[wcount][word[wcount]] = chars[i];
+				arr[wcount] += chars[i];
 			}
 			else {
 				wcount++;
+				arr[wcount] = "";
 			}
 		}
 	}
+	// sort by lenghts
+	sort(arr, wcount);
 
-	for (int i = 0; i <= wcount; i++) {
-		for (int j = 0; j <= wcount; j++) {
-			if (word[i] < word[order[i]]) {
-				for (int z = i; j > z; z--) {
-					order[z] = order[z - 1];
+	//distinction of words of the same alphabetical length
+	for (int i = 1; i < wcount; i++)
+	{
+		if (arr[i - 1].length() == arr[i].length())
+		{
+			int k = i;
+			while (arr[k].length() == arr[i - 1].length())
+			{
+				k++;
+			}
+			for (int sort_i = i - 1; i < k; i++)
+			{
+				for(int sort_j = i; sort_j < k; sort_j++)
+				{
+					if ( arr[sort_j - 1] > arr[sort_j])
+					{
+						std::string t;
+						t = arr[sort_j];
+						t = arr[sort_j - 1];
+						arr[sort_j - 1] = arr[sort_j];
+						arr[sort_j] = t;
+					}
 				}
-				order[j] = i;
 			}
-			else if (word[i] == word[order[i]]) {
-				// pune problema sortarii pe aflabetice
-			}
+			i = k;
 		}
 	}
 
-	for (int i = 0; i < wcount; i++) {
-		for (int j = 0; j < word[order[i]]; i++) {
-			printf("%c", m[order[i]][j]);
-		}
-		printf("\n");
+	for (int i = 0; i < wcount; i++)
+	{
+		//printf("%s \n", arr[i]);
+		std::cout << arr[i] << " ";
 	}
 
-	fclose(file);
-
-	printf("%d", sum);
 	return 0;
 }
 
