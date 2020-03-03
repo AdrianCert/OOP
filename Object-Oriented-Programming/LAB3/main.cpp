@@ -4,7 +4,7 @@
 
 int main()
 {
-	/* Demo for Math.h * /
+	/* Demo for Math.h */
 	double ex_01 = 3147483647;
 	double ex_02 = 1147483647;
 	double ex_03 = 2;

@@ -14,11 +14,11 @@ int Math::Add(int a, int b, int c)
 }
 int Math::Add(double a, double b)
 {
-	return a + b;
+	return (int)(a + b);
 }
 int Math::Add(double a, double b, double c)
 {
-	return a + b + c;
+	return (int)(a + b + c);
 }
 int Math::Mul(int a, int b)
 {
@@ -30,11 +30,11 @@ int Math::Mul(int a, int b, int c)
 }
 int Math::Mul(double a, double b)
 {
-	return a * b;
+	return (int)(a * b);
 }
 int Math::Mul(double a, double b, double c)
 {
-	return a * b * c;
+	return (int)(a * b * c);
 }
 // sums up a list of integers
 int Math::Add(int count, ...)
@@ -56,11 +56,19 @@ char* Math::Add(const char* a, const char* b)
 	{
 		if (b)
 		{
-			int n = 1 + strlen(a) + strlen(b);
-			char* r = new char[n] { '\0'};
-			strcat(r, a);
-			strcat(r, b);
-			return r;
+			char r[1000] = { '\n' };
+			int r_i = 0;
+			for(int i = 0; a[i] != '\0'; i++)
+			{
+				r[r_i++] = a[i];
+			}
+			for (int i = 0; b[i] != '\0'; i++)
+			{
+				r[r_i++] = b[i];
+			}
+			r[r_i++] = '\0';
+			char * rez = new char[r_i];
+			return rez;
 		}
 	}
 	return nullptr;

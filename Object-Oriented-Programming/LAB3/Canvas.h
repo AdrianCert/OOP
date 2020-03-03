@@ -3,7 +3,8 @@
 
 class Canvas
 {
-	int width, height;
+	int width = 0;
+	int height = 0;
 	char** figure = 0;
 public:
 	Canvas() = delete;

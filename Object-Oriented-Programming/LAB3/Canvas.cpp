@@ -6,13 +6,16 @@ Canvas::Canvas(int width, int height)
 {
 	this->width = width;
 	this->height = height;
-	this->figure = new char* [height];
-	for (int i = 0; i < height; ++i) {
+	if (width > 0 && height > 0)
+	{
+		this->figure = new char* [height];
+		for (int i = 0; i < height; ++i) {
 
-		this->figure[i] = new char[width];
-		if (this->figure[i]) {
-			for (int j = 0; j < width; ++j) {
-				this->figure[i][j] = 32;
+			this->figure[i] = new char[width];
+			if (this->figure[i]) {
+				for (int j = 0; j < width; ++j) {
+					this->figure[i][j] = 32;
+				}
 			}
 		}
 	}
@@ -24,7 +27,7 @@ void Canvas::DrawCircle(int x, int y, int ray, char ch)
 	{
 		for (int j = 0; j < width; j++)
 		{
-			if (ray * ray - (x - i) * (x - i) + (y - j) * (y - j) < 1)
+			if (ray * ray == (x - i) * (x - i) + (y - j) * (y - j))
 			{
 				this->figure[i][j] = ch;
 			}
