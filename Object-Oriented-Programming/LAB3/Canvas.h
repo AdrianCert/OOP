@@ -1,3 +1,6 @@
+#ifndef _CANVAS_H_
+#define _CANVAS_H_
+
 class Canvas
 {
 	int width, height;
@@ -14,3 +17,5 @@ public:
 	void Print(); // shows what was printed
 	void Clear(); // clears the canvas
 };
+
+#endif // !_CANVAS_H_

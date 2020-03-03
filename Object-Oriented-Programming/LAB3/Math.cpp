@@ -3,20 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 
-int Math::Add(int, int)
+int Math::Add(int a, int b)
 {
-	_asm {
-		mov eax, [ebp + 8]
-		add eax, [ebp + 12]
-	}
+	return a + b;
 }
-int Math::Add(int, int, int)
+
+int Math::Add(int a, int b, int c)
 {
-	_asm {
-		mov eax, [ebp + 8]
-		add eax, [ebp + 12]
-		add eax, [ebp + 16]
-	}
+	return a + b + c;
 }
 int Math::Add(double a, double b)
 {
@@ -62,7 +56,8 @@ char* Math::Add(const char* a, const char* b)
 	{
 		if (b)
 		{
-			char* r = new char[1]{ '\0'};
+			int n = 1 + strlen(a) + strlen(b);
+			char* r = new char[n] { '\0'};
 			strcat(r, a);
 			strcat(r, b);
 			return r;
