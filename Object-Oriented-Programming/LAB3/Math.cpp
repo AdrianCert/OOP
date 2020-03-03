@@ -68,6 +68,10 @@ char* Math::Add(const char* a, const char* b)
 			}
 			r[r_i++] = '\0';
 			char * rez = new char[r_i];
+			for(int i = 0; i < r_i; i++)
+			{
+				rez[i] = r[i];
+			}
 			return rez;
 		}
 	}
