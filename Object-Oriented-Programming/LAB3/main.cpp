@@ -4,7 +4,7 @@
 
 int main()
 {
-	/* Demo for Math.h */
+	/* Demo for Math.h * /
 	double ex_01 = 3147483647;
 	double ex_02 = 1147483647;
 	double ex_03 = 2;
@@ -50,10 +50,13 @@ int main()
 	std::cout << Math::Add("Ana are", " Mere") << std::endl;
 
 	/* End Demo for Math.h */
+	/* New ddd */
 	Canvas m(50,50);
-	//m.FillRect(2, 5, 10, 20,'.');
-	m.DrawCircle(20, 20, 10, '.');
+
+	m.FillCircle(20, 20, 10, 'x');
+	//m.FillRect(2, 2, 20, 20, '*');
+	//m.DrawRect(2, 2, 20, 20, '#');
 	m.Print();
-	
+	//*/
 	return 0;
 }

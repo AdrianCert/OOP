@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #include <iostream>
 
-Canvas::Canvas(int width, int height)
+Canvas::Canvas(int _width, int _height)
 {
-	this->width = width;
-	this->height = height;
+	this->width = _width;
+	this->height = _height;
 	if (width > 0 && height > 0)
 	{
 		this->figure = new char* [height];
@@ -23,27 +23,40 @@ Canvas::Canvas(int width, int height)
 
 void Canvas::DrawCircle(int x, int y, int ray, char ch)
 {
-	for (int i = 0; i < height; i++)
+	const double PI = 3.14;
+	for (double i = 0; i < 4 * PI; i += 0.01)
 	{
-		for (int j = 0; j < width; j++)
-		{
-			if (ray * ray == (x - i) * (x - i) + (y - j) * (y - j))
-			{
-				this->figure[i][j] = ch;
-			}
-		}
+		int px = (int)(width / 2 + ray) * cos(i);
+		int py = (int)(width / 2 + ray) * sin(i);
+		this->figure[px][py] = ch;
 	}
 }
+// to optimize
 void Canvas::FillCircle(int x, int y, int ray, char ch)
 {
-	for (int i = 0; i < height; i++)
+	for (int i = y - ray; i <= x + ray; i++)
 	{
-		for (int j = 0; j < width; j++)
+		for (int j = x - ray; j <= y + ray; j++)
 		{
-			if (ray * ray >= (x - i) * (x - i) + (y - j) * (y - j))
-			{
+			if (ray * ray - (x - i) * (x - i) - (y - j) * (y - j) > 0)
 				this->figure[i][j] = ch;
+			/** /
+			if (ray * ray - (x - i) * (x - i) - (y - j) * (y - j) > 0)
+			{
+				// c2
+				this->figure[i][j] = ch;
+				// c1
+				if(y + ray - i < this->width)
+					this->figure[y + ray - i][j] =  ch;
+				// c3
+				if(j + ray - j < this->height)
+					this->figure[i][j + ray - j] =  ch;
+				// c4
+				if(j + ray - j < this->height && y + ray - i < this->width)
+					this->figure[y + ray - i][j + ray - j] =  ch;
 			}
+			/**/
+			
 		}
 	}
 }
@@ -104,7 +117,7 @@ void Canvas::Print()
 			{
 				for (int j = 0; j < width; ++j)
 				{
-					std::cout << this->figure[i][j];
+					std::cout << this->figure[i][j] << this->figure[i][j];
 				}
 			}
 			std::cout << std::endl;
